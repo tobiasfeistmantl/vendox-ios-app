@@ -41,16 +41,7 @@ struct API {
                 if let data: AnyObject = jsonData {
                     for (key: String, product: JSON) in JSON(data) {
                         products.append(
-                            Product(
-                                name: product["name"],
-                                price: product["price"],
-                                description: product["description"],
-                                company: product["company"],
-                                image: product["picture"],
-                                latitude: product["latitude"],
-                                longitude: product["longitude"],
-                                distanceToUser: product["distance"]
-                            )
+                            Product(jsonProduct: product)
                         )
                     }
                 }

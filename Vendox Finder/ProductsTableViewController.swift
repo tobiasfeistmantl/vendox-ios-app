@@ -20,9 +20,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Lade Produkte in der Nähe")
-        refreshControl.addTarget(self, action: "getProducts", forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl)
+            refreshControl.addTarget(self, action: "getProducts", forControlEvents: .ValueChanged)
         self.refreshControl = refreshControl
         
         locationManager.delegate = self
@@ -61,8 +59,8 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         cell.productNameLabel.text = product.name
         cell.productCompanyNameLabel.text = product.company.name
 
-        if let formattedPrice = product.formattedPrice() {
-            cell.productPriceLabel.text = formattedPrice
+        if product.formattedPrice() != nil {
+            cell.productPriceLabel.text = product.formattedPrice()!
         } else {
             cell.productPriceLabel.text = "Preis auf Nachfrage"
             cell.productPriceLabel.textColor = UIColor.grayColor()

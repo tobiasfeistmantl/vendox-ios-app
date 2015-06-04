@@ -62,6 +62,20 @@ struct Product {
         self.distanceToUser = distanceToUser.double
     }
     
+    init(jsonProduct product: JSON) {
+        self.init(
+            name: product["name"],
+            price: product["price"],
+            description: product["description"],
+            company: product["company"],
+            image: product["picture"],
+            latitude: product["latitude"],
+            longitude: product["longitude"],
+            distanceToUser: product["distance"]
+        )
+    }
+    /*** For API data ***/
+    
     func formattedPrice(currencyCode: String = "EUR") -> String? {
         if let price = self.price {
             let formatter = NSNumberFormatter()
