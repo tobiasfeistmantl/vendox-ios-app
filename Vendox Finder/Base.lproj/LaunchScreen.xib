@@ -8,42 +8,36 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5499999999999996" contentMode="center" fixedFrame="YES" image="Map View BG" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-zB-NuI">
+                    <rect key="frame" x="-76" y="-136" width="567" height="1008"/>
+                </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="Vendox" translatesAutoresizingMaskIntoConstraints="NO" id="pR2-0Y-dfA">
-                    <rect key="frame" x="60" y="176" width="293" height="93"/>
+                    <rect key="frame" x="41" y="176" width="293" height="93"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="293" id="eFl-gE-LTe"/>
                         <constraint firstAttribute="width" secondItem="pR2-0Y-dfA" secondAttribute="height" multiplier="293:93" id="m5M-ks-ogo"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HkM-xC-YB9">
-                    <rect key="frame" x="156" y="277" width="101.5" height="45.5"/>
+                    <rect key="frame" x="136" y="277" width="101.5" height="45.5"/>
                     <fontDescription key="fontDescription" name="AvenirNext-BoldItalic" family="Avenir Next" pointSize="33"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.39999999999999963" contentMode="center" image="Map View BG" translatesAutoresizingMaskIntoConstraints="NO" id="tsk-1b-xRf">
-                    <rect key="frame" x="-76.5" y="-136" width="567" height="1008"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="567" id="bBi-qr-k94"/>
-                        <constraint firstAttribute="height" constant="1008" id="eIh-Xc-yw6"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="pR2-0Y-dfA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="176" id="3qA-UW-gso"/>
-                <constraint firstAttribute="centerY" secondItem="tsk-1b-xRf" secondAttribute="centerY" id="Bco-MX-pfI"/>
-                <constraint firstAttribute="centerX" secondItem="tsk-1b-xRf" secondAttribute="centerX" id="EGB-90-695"/>
                 <constraint firstAttribute="centerX" secondItem="pR2-0Y-dfA" secondAttribute="centerX" id="c6d-9C-I6n"/>
                 <constraint firstAttribute="centerX" secondItem="HkM-xC-YB9" secondAttribute="centerX" id="mft-u1-n9c"/>
                 <constraint firstItem="HkM-xC-YB9" firstAttribute="top" secondItem="pR2-0Y-dfA" secondAttribute="bottom" constant="8" id="qbN-5m-sJA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="547" y="454"/>
         </view>
     </objects>

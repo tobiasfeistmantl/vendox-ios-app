@@ -20,7 +20,8 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action: "getProducts", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: "getProducts", forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Produkte in deiner Nähe werden geladen")
         self.refreshControl = refreshControl
         
         locationManager.delegate = self
