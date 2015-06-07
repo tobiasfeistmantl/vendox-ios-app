@@ -13,7 +13,6 @@ import MapKit
 class ProductViewController: UIViewController {
     var product: Product!
 
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productCompanyNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
@@ -27,7 +26,14 @@ class ProductViewController: UIViewController {
         
         productNameLabel.text = product.name
         productCompanyNameLabel.text = product.company.name
-        productDescriptionLabel.text = product.description
+        
+        if let description = product.description {
+            productDescriptionLabel.text = product.description
+        } else {
+            productDescriptionTitleLabel.text = ""
+            productDescriptionLabel.text = ""
+        }
+        
         productMapView.addAnnotation(product.mapAnnotation)
 
         if let formattedPrice = product.formattedPrice() {
