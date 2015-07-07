@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Spring
 
 class ProductViewController: UIViewController {
     var product: Product!

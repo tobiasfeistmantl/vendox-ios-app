@@ -11,6 +11,7 @@ import CoreLocation
 
 class ProductsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchBarDelegate {
     var products: [Product] = []
+    var nextPage = 1
     var locationManager = CLLocationManager()
     var location: CLLocation?
     
@@ -20,7 +21,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "getProducts", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: "refreshProducts", forControlEvents: .ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Produkte in deiner Nähe werden geladen")
         self.refreshControl = refreshControl
         
@@ -30,13 +31,14 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         searchBar.enablesReturnKeyAutomatically = false
         
         locationManager.requestWhenInUseAuthorization()
-        
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
             locationManager.startUpdatingLocation()
         } else {
-            getProducts()
+            refreshProducts()
         }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,11 +62,10 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         cell.productNameLabel.text = product.name
         cell.productCompanyNameLabel.text = product.company.name
 
-        if product.formattedPrice() != nil {
-            cell.productPriceLabel.text = product.formattedPrice()!
+        if let formattedPrice = product.formattedPrice() {
+            cell.productPriceLabel.text = formattedPrice
         } else {
             cell.productPriceLabel.text = "Preis auf Nachfrage"
-            cell.productPriceLabel.textColor = UIColor.grayColor()
         }
         
         cell.productImageView.image = product.image
@@ -90,18 +91,20 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         locationManager.stopUpdatingLocation()
         
-        getProducts()
+        API.setNewLocation(locationManager.location)
+        
+        refreshProducts()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        getProducts()
+        refreshProducts()
         
         searchBar.resignFirstResponder()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
-            getProducts()
+            refreshProducts()
         }
     }
     
@@ -109,18 +112,43 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         searchBar.resignFirstResponder()
     }
     
-    func getProducts() {
-        let refreshControlYOffset = -(UIApplication.sharedApplication().statusBarFrame.size.height + navigationController!.navigationBar.frame.height + refreshControl!.frame.height)
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let currentOffset = scrollView.contentOffset.y;
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
-        tableView.setContentOffset(CGPointMake(0, refreshControlYOffset), animated: true)
+        if maximumOffset - currentOffset <= -40 {
+            getProducts()
+        }
+    }
+    
+    func getProducts() {
         refreshControl?.beginRefreshing()
         
-        API.getProducts(searchValue: searchBar.text, location: locationManager.location) { (products, errors) in
+        API.getProducts(searchValue: searchBar.text, page: nextPage) { (products, errors) in
+            self.products += products
+            self.tableView.reloadData()
+            
+            if products.count != 0 {
+                self.nextPage += 1
+            }
+            
+            self.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func refreshProducts() {
+        refreshControl?.beginRefreshing()
+        
+        nextPage = 1
+        
+        API.getProducts(searchValue: searchBar.text, page: nextPage) { (products, errors) in
             self.products = products
             self.tableView.reloadData()
             
             self.refreshControl?.endRefreshing()
         }
+        
+        nextPage += 1
     }
     
 }
