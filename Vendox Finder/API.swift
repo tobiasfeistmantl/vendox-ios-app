@@ -15,7 +15,7 @@ import KeychainAccess
 
 struct API {
     static let PROTOCOL = "http"
-    static let DOMAIN = "vendox.net"
+    static let DOMAIN = "www.vendox.net"
     static let PATH = "api"
     static let VERSION = "v1"
     
@@ -90,13 +90,12 @@ struct API {
             "device": UIDevice.currentDevice().model
         ]
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            Alamofire.request(.POST, APIUrl, parameters: parameters).responseJSON { (_, _, jsonData, errors) in
-                if let data: AnyObject = jsonData {
-                    let userObj = JSON(data)
-                    
-                    self.keychain["token"] = userObj["token"].string!
-                }
+       
+        Alamofire.request(.POST, APIUrl, parameters: parameters).responseJSON { (_, _, jsonData, errors) in
+            if let data: AnyObject = jsonData {
+                let userObj = JSON(data)
+                
+                self.keychain["token"] = userObj["token"].string!
             }
         }
     }
