@@ -22,6 +22,8 @@
 	<string>1.0.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Wir brauchen deinen Standort um Produkte in deiner Nähe anzuzeigen und um dich über interessante Dinge in deiner Nähe zu informieren</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Wir brauchen deinen Standort um Produkte in deiner Nähe anzuzeigen</string>
 	<key>UILaunchStoryboardName</key>

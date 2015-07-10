@@ -16,25 +16,21 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     var location: CLLocation?
     
     @IBOutlet weak var searchBar: UISearchBar!
+    var loadProductsActivityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refreshProducts", forControlEvents: .ValueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "Produkte in deiner Nähe werden geladen")
-        self.refreshControl = refreshControl
+        initRefreshControl()
+        initDelegation()
+        initSearchBar()
+        initLoadProductsActivityIndicator()
         
-        locationManager.delegate = self
-        searchBar.delegate = self
-        
-        searchBar.enablesReturnKeyAutomatically = false
-        
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+        if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
             locationManager.startUpdatingLocation()
         } else {
             refreshProducts()
@@ -122,8 +118,6 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     }
     
     func getProducts() {
-        refreshControl?.beginRefreshing()
-        
         API.getProducts(searchValue: searchBar.text, page: nextPage) { (products, errors) in
             self.products += products
             self.tableView.reloadData()
@@ -133,11 +127,14 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
             }
             
             self.refreshControl?.endRefreshing()
+            self.loadProductsActivityIndicator.stopAnimating()
         }
     }
     
     func refreshProducts() {
-        refreshControl?.beginRefreshing()
+        if products.count == 0 {
+            loadProductsActivityIndicator.startAnimating()
+        }
         
         nextPage = 1
         
@@ -146,9 +143,31 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
             self.tableView.reloadData()
             
             self.refreshControl?.endRefreshing()
+            self.loadProductsActivityIndicator.stopAnimating()
         }
         
         nextPage += 1
     }
     
+    func initRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshProducts", forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Produkte in deiner Nähe werden geladen")
+        self.refreshControl = refreshControl
+    }
+    
+    func initDelegation() {
+        locationManager.delegate = self
+        searchBar.delegate = self
+    }
+    
+    func initSearchBar() {
+        searchBar.enablesReturnKeyAutomatically = false
+    }
+    
+    func initLoadProductsActivityIndicator() {
+        loadProductsActivityIndicator.center = tableView.center
+        loadProductsActivityIndicator.color = .grayColor()
+        tableView.addSubview(loadProductsActivityIndicator)
+    }
 }
