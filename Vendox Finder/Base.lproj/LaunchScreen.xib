@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -10,33 +10,25 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5499999999999996" contentMode="scaleToFill" image="Map View BG" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-zB-NuI">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Default BG" translatesAutoresizingMaskIntoConstraints="NO" id="DKG-Q3-M9q">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Vendox" translatesAutoresizingMaskIntoConstraints="NO" id="w2d-52-80X">
-                    <rect key="frame" x="38" y="158" width="300" height="95"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Brand Name White" translatesAutoresizingMaskIntoConstraints="NO" id="Rzu-Cq-qEq">
+                    <rect key="frame" x="58" y="185" width="260" height="58"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="2Pg-qx-E92"/>
-                        <constraint firstAttribute="height" constant="95" id="41a-Kx-3Ru"/>
+                        <constraint firstAttribute="height" constant="58" id="1vz-1u-Kya"/>
+                        <constraint firstAttribute="width" constant="260" id="CkN-Yq-YfQ"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvm-qh-7HS">
-                    <rect key="frame" x="143" y="269" width="88" height="41"/>
-                    <fontDescription key="fontDescription" name="AvenirNext-DemiBoldItalic" family="Avenir Next" pointSize="30"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="rvm-qh-7HS" secondAttribute="centerX" id="7qZ-Wf-v0K"/>
-                <constraint firstItem="hNM-zB-NuI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Gou-xS-USO"/>
-                <constraint firstItem="hNM-zB-NuI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PGT-6S-Opn"/>
-                <constraint firstAttribute="trailing" secondItem="hNM-zB-NuI" secondAttribute="trailing" id="aL8-KX-v9x"/>
-                <constraint firstItem="w2d-52-80X" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="158" id="ah9-BO-Gnp"/>
-                <constraint firstItem="rvm-qh-7HS" firstAttribute="top" secondItem="w2d-52-80X" secondAttribute="bottom" constant="16" id="hBP-Cf-1XH"/>
-                <constraint firstAttribute="centerX" secondItem="w2d-52-80X" secondAttribute="centerX" id="pnn-eb-IlY"/>
-                <constraint firstAttribute="bottom" secondItem="hNM-zB-NuI" secondAttribute="bottom" id="qnm-uF-UJZ"/>
+                <constraint firstItem="DKG-Q3-M9q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7FH-eW-Cgj"/>
+                <constraint firstAttribute="bottom" secondItem="DKG-Q3-M9q" secondAttribute="bottom" id="Ax2-I1-kp5"/>
+                <constraint firstAttribute="centerX" secondItem="Rzu-Cq-qEq" secondAttribute="centerX" id="CoC-B9-h5n"/>
+                <constraint firstItem="DKG-Q3-M9q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IYQ-Ce-FPI"/>
+                <constraint firstAttribute="trailing" secondItem="DKG-Q3-M9q" secondAttribute="trailing" id="kGm-oA-bnl"/>
+                <constraint firstAttribute="centerY" secondItem="Rzu-Cq-qEq" secondAttribute="centerY" constant="120" id="rTF-lw-xrB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -44,7 +36,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Map View BG" width="567" height="1008"/>
-        <image name="Vendox" width="561" height="179"/>
+        <image name="Brand Name White" width="433" height="98"/>
+        <image name="Default BG" width="316" height="426"/>
     </resources>
 </document>

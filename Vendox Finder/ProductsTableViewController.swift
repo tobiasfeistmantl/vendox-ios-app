@@ -26,6 +26,16 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         initSearchBar()
         initLoadProductsActivityIndicator()
         
+        let navigationRectangle = CGRectMake(0, 0, 100, 22.63)
+        
+        let navigationImage = UIImageView(frame: navigationRectangle)
+        navigationImage.image = UIImage(named: "Brand Name White Navigation Bar")!
+        
+        let workaroundImageView = UIImageView(frame: navigationRectangle)
+        workaroundImageView.addSubview(navigationImage)
+        
+        navigationItem.titleView = workaroundImageView
+        
         locationManager.requestAlwaysAuthorization()
     }
     
