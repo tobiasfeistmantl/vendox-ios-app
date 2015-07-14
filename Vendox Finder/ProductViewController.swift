@@ -49,6 +49,8 @@ class ProductViewController: UIViewController {
         } else {
             productDistanceLabel.removeFromSuperview()
         }
+        
+        zoomToUserLocationInMapView(productMapView, product.location.coordinate)
     }
 
     override func didReceiveMemoryWarning() {

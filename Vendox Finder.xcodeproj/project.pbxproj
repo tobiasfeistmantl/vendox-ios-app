@@ -21,6 +21,7 @@
 		1156BCD11B173CEF00576B60 /* home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1156BCD01B173CEF00576B60 /* home.gpx */; };
 		118A3F6B1B3A9FDB008F82BB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 118A3F6A1B3A9FDB008F82BB /* Podfile */; };
 		11CBBB351B4FAF50003ED62F /* ProductsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CBBB341B4FAF50003ED62F /* ProductsNavigationViewController.swift */; };
+		11E7C2391B54E85000B616C4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7C2381B54E85000B616C4 /* Utilities.swift */; };
 		6A0BBDB95B13ABB2598EF291 /* Pods_Vendox_Finder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0A9B10595CE42729EE1B28 /* Pods_Vendox_Finder.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		1156BCD01B173CEF00576B60 /* home.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = home.gpx; sourceTree = "<group>"; };
 		118A3F6A1B3A9FDB008F82BB /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		11CBBB341B4FAF50003ED62F /* ProductsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsNavigationViewController.swift; sourceTree = "<group>"; };
+		11E7C2381B54E85000B616C4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		3D825E5ED0F272011C377DEA /* Pods-Vendox Finder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendox Finder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vendox Finder/Pods-Vendox Finder.release.xcconfig"; sourceTree = "<group>"; };
 		5C4EE0B1AA184F1C75C99142 /* Pods-Vendox Finder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendox Finder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vendox Finder/Pods-Vendox Finder.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0A9B10595CE42729EE1B28 /* Pods_Vendox_Finder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vendox_Finder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				1156BCCE1B17340800576B60 /* API.swift */,
+				11E7C2381B54E85000B616C4 /* Utilities.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				111E2A3F1B11229800F10F5A /* ProductViewController.swift in Sources */,
 				11CBBB351B4FAF50003ED62F /* ProductsNavigationViewController.swift in Sources */,
 				111E2A331B11192100F10F5A /* Company.swift in Sources */,
+				11E7C2391B54E85000B616C4 /* Utilities.swift in Sources */,
 				1156BCCF1B17340800576B60 /* API.swift in Sources */,
 				111E2A3C1B111DD900F10F5A /* ProductTableViewCell.swift in Sources */,
 			);

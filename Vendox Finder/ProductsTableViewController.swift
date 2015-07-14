@@ -25,16 +25,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         initDelegation()
         initSearchBar()
         initLoadProductsActivityIndicator()
-        
-        let navigationRectangle = CGRectMake(0, 0, 100, 22.63)
-        
-        let navigationImage = UIImageView(frame: navigationRectangle)
-        navigationImage.image = UIImage(named: "Brand Name White Navigation Bar")!
-        
-        let workaroundImageView = UIImageView(frame: navigationRectangle)
-        workaroundImageView.addSubview(navigationImage)
-        
-        navigationItem.titleView = workaroundImageView
+        initTitleView()
         
         locationManager.requestAlwaysAuthorization()
     }
@@ -179,5 +170,17 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         loadProductsActivityIndicator.center = tableView.center
         loadProductsActivityIndicator.color = .grayColor()
         tableView.addSubview(loadProductsActivityIndicator)
+    }
+    
+    func initTitleView() {
+        let navigationRectangle = CGRectMake(0, 0, 100, 22.63)
+        
+        let navigationImage = UIImageView(frame: navigationRectangle)
+        navigationImage.image = UIImage(named: "Brand Name White Navigation Bar")!
+        
+        let workaroundImageView = UIImageView(frame: navigationRectangle)
+        workaroundImageView.addSubview(navigationImage)
+        
+        navigationItem.titleView = workaroundImageView
     }
 }
