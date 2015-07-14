@@ -88,9 +88,19 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         locationManager.stopUpdatingLocation()
         
-        API.setNewLocation(locationManager.location)
-        
-        refreshProducts()
+        API.checkUserTokenValidity { (validity, _, _) in
+            if validity == true {
+                API.setNewLocation(self.locationManager.location) { (_, _, _) in
+                    self.refreshProducts()
+                }
+            } else {
+                API.getNewUserToken() { token, _, _ in
+                    API.setNewLocation(self.locationManager.location) { (_, _, _) in
+                        self.refreshProducts()
+                    }
+                }
+            }
+        }
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

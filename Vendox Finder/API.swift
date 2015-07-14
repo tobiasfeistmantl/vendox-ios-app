@@ -62,7 +62,9 @@ struct API {
         }
     }
     
-    static func setNewLocation(location: CLLocation) {
+    static func setNewLocation(location: CLLocation, responseHandler: (Bool, NSHTTPURLResponse?, NSError?) -> Void) {
+        var success = false
+        
         if USER_TOKEN != nil {
             var APIUrl = API.BASE_URL + "users/positions"
         
@@ -78,24 +80,64 @@ struct API {
             mutableURLRequest.HTTPBody = params.rawData()
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                Alamofire.request(mutableURLRequest)
+                Alamofire.request(mutableURLRequest).response { (request, response, data, errors) in
+                    if let response = response {
+                        switch response.statusCode {
+                        case 201: success = true
+                        default: success = false
+                        }
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        responseHandler(success, response, errors)
+                    }
+                }
             }
         }
     }
     
-    static func getNewUserToken() {
+    static func getNewUserToken(responseHandler: (String?, NSHTTPURLResponse?, NSError?) -> Void) {
         var APIUrl = API.BASE_URL + "users/sessions"
+        var token: String?
         
         let parameters: [String: AnyObject] = [
             "device": UIDevice.currentDevice().model
         ]
         
        
-        Alamofire.request(.POST, APIUrl, parameters: parameters).responseJSON { (_, _, jsonData, errors) in
-            if let data: AnyObject = jsonData {
-                let userObj = JSON(data)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            Alamofire.request(.POST, APIUrl, parameters: parameters).responseJSON { (_, response, jsonData, errors) in
+                if let data: AnyObject = jsonData {
+                    let userObj = JSON(data)
+                    token = userObj["token"].string!
+                    
+                    self.keychain["token"] = token
+                }
+            
+                dispatch_async(dispatch_get_main_queue()) {
+                    responseHandler(token, response, errors)
+                }
+            }
+        }
+    }
+    
+    static func checkUserTokenValidity(responseHandler: (Bool, NSHTTPURLResponse?, NSError?) -> Void) {
+        let APIUrl = BASE_URL + "users/session"
+        let mutableURLRequest = mutableURLRequestWithTokenAuthorization(url: APIUrl)
+        var validity = false
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            Alamofire.request(mutableURLRequest).response { (request, response, data, errors) in
+                if let response = response {
+                    switch response.statusCode {
+                    case 200: validity = true
+                    default: validity = false
+                    }
+                }
                 
-                self.keychain["token"] = userObj["token"].string!
+                dispatch_async(dispatch_get_main_queue()) {
+                    responseHandler(validity, response, errors)
+                }
             }
         }
     }
@@ -105,7 +147,10 @@ struct API {
         let mutableURLRequest = NSMutableURLRequest(URL: url)
         
         mutableURLRequest.HTTPMethod = httpMethod
-        mutableURLRequest.setValue("Token token=\(USER_TOKEN!)", forHTTPHeaderField: "Authorization")
+        
+        if let userToken = USER_TOKEN {
+            mutableURLRequest.setValue("Token token=\(userToken)", forHTTPHeaderField: "Authorization")
+        }
         
         return mutableURLRequest
     }
