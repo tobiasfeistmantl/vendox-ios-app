@@ -17,10 +17,13 @@
 		111E2A351B11197E00F10F5A /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E2A341B11197E00F10F5A /* Product.swift */; };
 		111E2A3C1B111DD900F10F5A /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E2A3B1B111DD900F10F5A /* ProductTableViewCell.swift */; };
 		111E2A3F1B11229800F10F5A /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E2A3E1B11229800F10F5A /* ProductViewController.swift */; };
+		112F43321B6419D8009F6E7B /* SavedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F43311B6419D8009F6E7B /* SavedProduct.swift */; };
 		1156BCCF1B17340800576B60 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156BCCE1B17340800576B60 /* API.swift */; };
 		1156BCD11B173CEF00576B60 /* home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1156BCD01B173CEF00576B60 /* home.gpx */; };
 		118A3F6B1B3A9FDB008F82BB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 118A3F6A1B3A9FDB008F82BB /* Podfile */; };
 		11CBBB351B4FAF50003ED62F /* ProductsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CBBB341B4FAF50003ED62F /* ProductsNavigationViewController.swift */; };
+		11D052241B642BA80058D94D /* work.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 11D052231B642BA80058D94D /* work.gpx */; };
+		11D052261B642C1E0058D94D /* fitnessstudio.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 11D052251B642C1E0058D94D /* fitnessstudio.gpx */; };
 		11E7C2391B54E85000B616C4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7C2381B54E85000B616C4 /* Utilities.swift */; };
 		6A0BBDB95B13ABB2598EF291 /* Pods_Vendox_Finder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0A9B10595CE42729EE1B28 /* Pods_Vendox_Finder.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -38,7 +41,7 @@
 /* Begin PBXFileReference section */
 		111E2A071B1115E500F10F5A /* Vendox Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vendox Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		111E2A0B1B1115E500F10F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		111E2A0C1B1115E500F10F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		111E2A0C1B1115E500F10F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Vendox Finder/AppDelegate.swift"; sourceTree = "<group>"; };
 		111E2A111B1115E500F10F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		111E2A131B1115E500F10F5A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		111E2A161B1115E500F10F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -50,10 +53,13 @@
 		111E2A341B11197E00F10F5A /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		111E2A3B1B111DD900F10F5A /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		111E2A3E1B11229800F10F5A /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		112F43311B6419D8009F6E7B /* SavedProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedProduct.swift; sourceTree = "<group>"; };
 		1156BCCE1B17340800576B60 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		1156BCD01B173CEF00576B60 /* home.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = home.gpx; sourceTree = "<group>"; };
 		118A3F6A1B3A9FDB008F82BB /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		11CBBB341B4FAF50003ED62F /* ProductsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsNavigationViewController.swift; sourceTree = "<group>"; };
+		11D052231B642BA80058D94D /* work.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = work.gpx; sourceTree = "<group>"; };
+		11D052251B642C1E0058D94D /* fitnessstudio.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fitnessstudio.gpx; sourceTree = "<group>"; };
 		11E7C2381B54E85000B616C4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		3D825E5ED0F272011C377DEA /* Pods-Vendox Finder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendox Finder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vendox Finder/Pods-Vendox Finder.release.xcconfig"; sourceTree = "<group>"; };
 		5C4EE0B1AA184F1C75C99142 /* Pods-Vendox Finder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendox Finder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vendox Finder/Pods-Vendox Finder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,7 +88,10 @@
 		111E29FE1B1115E500F10F5A = {
 			isa = PBXGroup;
 			children = (
+				111E2A0C1B1115E500F10F5A /* AppDelegate.swift */,
 				1156BCD01B173CEF00576B60 /* home.gpx */,
+				11D052231B642BA80058D94D /* work.gpx */,
+				11D052251B642C1E0058D94D /* fitnessstudio.gpx */,
 				118A3F6A1B3A9FDB008F82BB /* Podfile */,
 				111E2A091B1115E500F10F5A /* Vendox Finder */,
 				111E2A1F1B1115E500F10F5A /* Vendox FinderTests */,
@@ -107,7 +116,6 @@
 				1156BCCB1B17329800576B60 /* Helpers */,
 				111E2A2D1B11160300F10F5A /* Models */,
 				111E2A2C1B1115FC00F10F5A /* Controllers */,
-				111E2A0C1B1115E500F10F5A /* AppDelegate.swift */,
 				111E2A101B1115E500F10F5A /* Main.storyboard */,
 				111E2A131B1115E500F10F5A /* Images.xcassets */,
 				111E2A151B1115E500F10F5A /* LaunchScreen.xib */,
@@ -157,6 +165,7 @@
 			children = (
 				111E2A321B11192100F10F5A /* Company.swift */,
 				111E2A341B11197E00F10F5A /* Product.swift */,
+				112F43311B6419D8009F6E7B /* SavedProduct.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -279,8 +288,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D052261B642C1E0058D94D /* fitnessstudio.gpx in Resources */,
 				111E2A121B1115E500F10F5A /* Main.storyboard in Resources */,
 				111E2A171B1115E500F10F5A /* LaunchScreen.xib in Resources */,
+				11D052241B642BA80058D94D /* work.gpx in Resources */,
 				111E2A141B1115E500F10F5A /* Images.xcassets in Resources */,
 				118A3F6B1B3A9FDB008F82BB /* Podfile in Resources */,
 				1156BCD11B173CEF00576B60 /* home.gpx in Resources */,
@@ -352,6 +363,7 @@
 				111E2A0D1B1115E500F10F5A /* AppDelegate.swift in Sources */,
 				111E2A311B11180F00F10F5A /* ProductsTableViewController.swift in Sources */,
 				111E2A351B11197E00F10F5A /* Product.swift in Sources */,
+				112F43321B6419D8009F6E7B /* SavedProduct.swift in Sources */,
 				111E2A3F1B11229800F10F5A /* ProductViewController.swift in Sources */,
 				11CBBB351B4FAF50003ED62F /* ProductsNavigationViewController.swift in Sources */,
 				111E2A331B11192100F10F5A /* Company.swift in Sources */,

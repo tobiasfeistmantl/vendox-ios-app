@@ -197,7 +197,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <color key="backgroundColor" red="0.98184226919906303" green="0.98184226919906303" blue="0.98184226919906303" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="tmb-gq-HRD" firstAttribute="top" secondItem="ZMa-pT-dzF" secondAttribute="bottom" constant="8" id="ImW-yV-hFd"/>
                                                     <constraint firstItem="ZMa-pT-dzF" firstAttribute="top" secondItem="qrd-oz-vIP" secondAttribute="topMargin" id="Px6-VL-eq8"/>
@@ -281,7 +281,15 @@
                             <constraint firstItem="hg6-9t-hAm" firstAttribute="top" secondItem="6YT-uP-WV6" secondAttribute="top" id="ykA-nf-4o6"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="qCI-f5-C0Z">
+                        <barButtonItem key="rightBarButtonItem" title="Erinnere mich" id="bsI-9m-jXU">
+                            <connections>
+                                <action selector="notifyMeButtonTouched:" destination="1Vb-dl-bzP" id="J1M-xD-zcV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="notifyMeButton" destination="bsI-9m-jXU" id="In9-me-lTN"/>
                         <outlet property="productCompanyNameLabel" destination="m4o-B5-jj8" id="DrE-Wu-DOq"/>
                         <outlet property="productDescriptionLabel" destination="tmb-gq-HRD" id="zcc-gP-ma7"/>
                         <outlet property="productDescriptionTitleLabel" destination="ZMa-pT-dzF" id="QtH-j9-wD6"/>

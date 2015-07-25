@@ -10,9 +10,12 @@ import UIKit
 import CoreLocation
 import MapKit
 import Spring
+import RealmSwift
 
 class ProductViewController: UIViewController {
     var product: Product!
+    var realm = Realm()
+    let locationManager = CLLocationManager()
 
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productCompanyNameLabel: UILabel!
@@ -22,6 +25,7 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var productDescriptionTitleLabel: UILabel!
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productDistanceLabel: DesignableLabel!
+    @IBOutlet weak var notifyMeButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +55,10 @@ class ProductViewController: UIViewController {
         }
         
         zoomToUserLocationInMapView(productMapView, product.location.coordinate)
+        
+        if product.savedProduct != nil {
+            notifyMeButton.enabled = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +89,12 @@ class ProductViewController: UIViewController {
         if let url = NSURL(string: "mailto:\(product.company.email)") {
             UIApplication.sharedApplication().openURL(url)
         }
+    }
+    
+    @IBAction func notifyMeButtonTouched(sender: UIBarButtonItem) {
+        let savedProduct = SavedProduct.createFromProduct(product)
+        addSavedProductToRegionMonitoring(savedProduct)
+        notifyMeButton.enabled = false
     }
     
     /*

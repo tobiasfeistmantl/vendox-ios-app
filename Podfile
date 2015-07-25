@@ -7,6 +7,7 @@ target 'Vendox Finder' do
     pod 'Alamofire'
     pod 'Spring'
     pod 'SwiftyJSON'
+    pod 'RealmSwift'
 end
 
 target 'Vendox FinderTests' do

@@ -13,6 +13,7 @@ import CoreLocation
 import SwiftyJSON
 
 struct Product {
+    var id: Int
     var name: String
     var price: Double?
     var description: String?
@@ -21,7 +22,8 @@ struct Product {
     var location: CLLocation
     var distanceToUser: Double?
     
-    init(name: String, price: Double?, description: String?, company: Company, image: UIImage, location: CLLocation, distanceToUser: Double?) {
+    init(id: Int, name: String, price: Double?, description: String?, company: Company, image: UIImage, location: CLLocation, distanceToUser: Double?) {
+        self.id = id
         self.name = name
         self.price = price
         self.description = description
@@ -32,7 +34,8 @@ struct Product {
     }
     
     /*** For API data ***/
-    init(name: JSON, price: JSON, description: JSON, company: JSON, image: JSON, latitude: JSON, longitude: JSON, distanceToUser: JSON) {
+    init(id: JSON, name: JSON, price: JSON, description: JSON, company: JSON, image: JSON, latitude: JSON, longitude: JSON, distanceToUser: JSON) {
+        self.id = id.int!
         self.name = name.string!
         self.price = price.double
         self.description = description.string
@@ -65,6 +68,7 @@ struct Product {
     
     init(jsonProduct product: JSON) {
         self.init(
+            id: product["id"],
             name: product["name"],
             price: product["price"],
             description: product["description"],
@@ -98,5 +102,9 @@ struct Product {
         annotation.subtitle = company.fullAddress
         
         return annotation
+    }
+    
+    var savedProduct: SavedProduct? {
+        return SavedProduct.findById(id)
     }
 }

@@ -8,13 +8,20 @@
 
 import UIKit
 import CoreLocation
+import RealmSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+    let locationManager = CLLocationManager()
+    let realm = Realm()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        locationManager.delegate = self
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         return true
     }
 
@@ -39,5 +46,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func handleRegionEvent(region: CLRegion) {
+        let product = SavedProduct.findById(region.identifier.toInt()!)!
+        let message = "Das Produkt \"\(product.name)\" ist in deiner Nähe!"
+
+        removeSavedProductFromRegionMonitoring(region)
+        
+        if UIApplication.sharedApplication().applicationState == .Active {
+            if let viewController = window?.rootViewController {
+                showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
+            }
+        } else {
+            // Otherwise present a local notification
+            var notification = UILocalNotification()
+            notification.alertBody = message
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
+        handleRegionEvent(region)
+    }
 }
+
 
