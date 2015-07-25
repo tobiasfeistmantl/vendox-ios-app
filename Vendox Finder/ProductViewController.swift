@@ -17,8 +17,9 @@ class ProductViewController: UIViewController {
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productCompanyNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
-    @IBOutlet weak var productDescriptionTitleLabel: UILabel!
     @IBOutlet weak var productMapView: MKMapView!
+    @IBOutlet weak var productDescriptionView: DesignableView!
+    @IBOutlet weak var productDescriptionTitleLabel: UILabel!
     @IBOutlet weak var productDescriptionLabel: UILabel!
     @IBOutlet weak var productDistanceLabel: DesignableLabel!
     
@@ -31,8 +32,7 @@ class ProductViewController: UIViewController {
         if let description = product.description {
             productDescriptionLabel.text = product.description
         } else {
-            productDescriptionTitleLabel.text = ""
-            productDescriptionLabel.text = ""
+            productDescriptionView.removeFromSuperview()
         }
         
         productMapView.addAnnotation(product.mapAnnotation)
