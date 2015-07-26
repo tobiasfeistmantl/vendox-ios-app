@@ -41,6 +41,13 @@ struct API {
             "page": page
         ]
         
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            params["without_position"] = 0
+        default:
+            params["without_position"] = 1
+        }
+        
         if let userToken = USER_TOKEN {
             params["session_token"] = userToken
         }

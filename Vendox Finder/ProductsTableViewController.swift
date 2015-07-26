@@ -31,7 +31,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
             locationManager.startUpdatingLocation()
         } else {
             refreshProducts()

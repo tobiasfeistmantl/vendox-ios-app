@@ -56,8 +56,12 @@ class ProductViewController: UIViewController {
         
         zoomToUserLocationInMapView(productMapView, product.location.coordinate)
         
-        if product.savedProduct != nil {
-            notifyMeButton.enabled = false
+        if CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) {
+            if product.savedProduct != nil {
+                notifyMeButton.title = "Nicht mehr erinnern"
+            }
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
 
@@ -71,11 +75,11 @@ class ProductViewController: UIViewController {
         var alert = UIAlertController(title: "Anrufen", message: "Willst du \(product.company.name) wirklich anrufen?", preferredStyle: .Alert)
         
         alert.addAction(
-            UIAlertAction(title: "Ja", style: .Default, handler: { (action: UIAlertAction!) in
+            UIAlertAction(title: "Ja", style: .Default) { (action: UIAlertAction!) in
                 if let url = NSURL(string: "tel:\(phoneNumber)") {
                     UIApplication.sharedApplication().openURL(url)
                 }
-            })
+            }
         )
         
         alert.addAction(
@@ -92,9 +96,28 @@ class ProductViewController: UIViewController {
     }
     
     @IBAction func notifyMeButtonTouched(sender: UIBarButtonItem) {
-        let savedProduct = SavedProduct.createFromProduct(product)
-        addSavedProductToRegionMonitoring(savedProduct)
-        notifyMeButton.enabled = false
+        if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+            if let savedProduct = product.savedProduct {
+                removeSavedProductFromRegionMonitoring(savedProduct.region)
+                notifyMeButton.title = "Erinnere mich"
+            } else {
+                let savedProduct = SavedProduct.createFromProduct(product)
+                addSavedProductToRegionMonitoring(savedProduct)
+                notifyMeButton.title = "Nicht mehr erinnern"
+            }
+        } else {
+            let alert = UIAlertController(title: "Kein dauerhafter Zugriff auf Standort gestattet!", message: "Um dich zu informieren, wenn du in der Nähe von einem Produkt bist, müssen wir immer Zugriff auf deinen Standort haben.", preferredStyle: .ActionSheet)
+            
+            alert.addAction(
+                UIAlertAction(title: "Einstellungen", style: .Default) { (action: UIAlertAction!) in
+                    UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+                }
+            )
+            
+            alert.addAction(UIAlertAction(title: "Abbrechen", style: .Cancel, handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     /*
