@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "Product Name"; ObjectID = "59j-gA-HtL"; */
+"59j-gA-HtL.text" = "Product Name";
+
+/* Class = "UILabel"; text = "Company Name"; ObjectID = "61O-uS-wpn"; */
+"61O-uS-wpn.text" = "Company Name";
+
+/* Class = "UILabel"; text = "Distance"; ObjectID = "DZc-xu-bWu"; */
+"DZc-xu-bWu.text" = "Distance";
+
+/* Class = "UISearchBar"; placeholder = "Produkte durchsuchen"; ObjectID = "GDI-Tr-K83"; */
+"GDI-Tr-K83.placeholder" = "Produkte durchsuchen";
+
+/* Class = "UIButton"; normalTitle = "☎︎ Anrufen"; ObjectID = "HBn-vI-KRO"; */
+"HBn-vI-KRO.normalTitle" = "☎︎ Anrufen";
+
+/* Class = "UILabel"; text = "Distance"; ObjectID = "MsV-j4-rbA"; */
+"MsV-j4-rbA.text" = "Distance";
+
+/* Class = "UILabel"; text = "Product Name"; ObjectID = "Myy-Ml-rOZ"; */
+"Myy-Ml-rOZ.text" = "Product Name";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "Qlo-3b-qIB"; */
+"Qlo-3b-qIB.text" = "Price";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "Wsv-9E-Zdg"; */
+"Wsv-9E-Zdg.text" = "Price";
+
+/* Class = "UIButton"; normalTitle = "@ Schreiben"; ObjectID = "Y4n-tp-xN2"; */
+"Y4n-tp-xN2.normalTitle" = "@ Schreiben";
+
+/* Class = "UILabel"; text = "Beschreibung"; ObjectID = "ZMa-pT-dzF"; */
+"ZMa-pT-dzF.text" = "Beschreibung";
+
+/* Class = "UIBarButtonItem"; title = "Erinnere mich"; ObjectID = "bsI-9m-jXU"; */
+"bsI-9m-jXU.title" = "Erinnere mich";
+
+/* Class = "UINavigationItem"; title = "Produkte"; ObjectID = "hHd-eI-bHz"; */
+"hHd-eI-bHz.title" = "Produkte";
+
+/* Class = "UILabel"; text = "Company Name"; ObjectID = "m4o-B5-jj8"; */
+"m4o-B5-jj8.text" = "Company Name";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "tmb-gq-HRD"; */
+"tmb-gq-HRD.text" = "Description";
