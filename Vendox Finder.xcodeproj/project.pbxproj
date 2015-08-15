@@ -25,6 +25,8 @@
 		11D052241B642BA80058D94D /* work.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 11D052231B642BA80058D94D /* work.gpx */; };
 		11D052261B642C1E0058D94D /* fitnessstudio.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 11D052251B642C1E0058D94D /* fitnessstudio.gpx */; };
 		11E7C2391B54E85000B616C4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7C2381B54E85000B616C4 /* Utilities.swift */; };
+		11F0B8FB1B7E744300D41B07 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0B8FA1B7E744300D41B07 /* UserAccount.swift */; };
+		11F0B8FF1B7E7DEB00D41B07 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0B8FE1B7E7DEB00D41B07 /* APIError.swift */; };
 		6A0BBDB95B13ABB2598EF291 /* Pods_Vendox_Finder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0A9B10595CE42729EE1B28 /* Pods_Vendox_Finder.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 		11D052231B642BA80058D94D /* work.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = work.gpx; sourceTree = "<group>"; };
 		11D052251B642C1E0058D94D /* fitnessstudio.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fitnessstudio.gpx; sourceTree = "<group>"; };
 		11E7C2381B54E85000B616C4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		11F0B8FA1B7E744300D41B07 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
+		11F0B8FE1B7E7DEB00D41B07 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		3D825E5ED0F272011C377DEA /* Pods-Vendox Finder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendox Finder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vendox Finder/Pods-Vendox Finder.release.xcconfig"; sourceTree = "<group>"; };
 		5C4EE0B1AA184F1C75C99142 /* Pods-Vendox Finder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vendox Finder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vendox Finder/Pods-Vendox Finder.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0A9B10595CE42729EE1B28 /* Pods_Vendox_Finder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vendox_Finder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +187,8 @@
 			children = (
 				1156BCCE1B17340800576B60 /* API.swift */,
 				11E7C2381B54E85000B616C4 /* Utilities.swift */,
+				11F0B8FA1B7E744300D41B07 /* UserAccount.swift */,
+				11F0B8FE1B7E7DEB00D41B07 /* APIError.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -363,6 +369,8 @@
 				111E2A311B11180F00F10F5A /* ProductsTableViewController.swift in Sources */,
 				111E2A351B11197E00F10F5A /* Product.swift in Sources */,
 				112F43321B6419D8009F6E7B /* SavedProduct.swift in Sources */,
+				11F0B8FB1B7E744300D41B07 /* UserAccount.swift in Sources */,
+				11F0B8FF1B7E7DEB00D41B07 /* APIError.swift in Sources */,
 				111E2A3F1B11229800F10F5A /* ProductViewController.swift in Sources */,
 				11CBBB351B4FAF50003ED62F /* ProductsNavigationViewController.swift in Sources */,
 				111E2A331B11192100F10F5A /* Company.swift in Sources */,

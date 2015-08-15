@@ -13,158 +13,206 @@ import Alamofire
 import SwiftyJSON
 import KeychainAccess
 
-struct API {
-    static let PROTOCOL = "http"
-    static let DOMAIN = "www.vendox.net"
-    static let PATH = "api"
-    static let VERSION = "v1"
+class API {
+    static let transferProtocol = "https"
+    static let domain = "vendox.herokuapp.com"
+    static let path = "api"
+    static let version = "v2"
     
-    static let keychain = Keychain(service: "net.vendox.session-token")
+    static let recordsPerPage = 10
     
-    static let RECORDS_PER_PAGE = 10
-    
-    static var BASE_URL: String {
-        return "\(PROTOCOL)://\(DOMAIN)/\(PATH)/\(VERSION)/"
+    static var URI: String {
+        return "\(transferProtocol)://\(domain)/\(path)/\(version)/"
     }
     
-    static var USER_TOKEN: String? {
-        return keychain["token"]
-    }
-    
-    static func getProducts(#searchValue: String, page: Int = 1, responseHandler: ([Product], NSError?) -> Void) {
-        var products: [Product] = []
-        var APIUrl = API.BASE_URL + "products"
-        var params: [String: AnyObject] = [
-            "q": [
-                "name_cont": searchValue
-            ],
-            "page": page
-        ]
+    class Products {
+        static let path = "products"
         
-        switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
-            params["without_position"] = 0
-        default:
-            params["without_position"] = 1
+        static var URI: String {
+            return "\(API.URI)\(path)/"
         }
         
-        if let userToken = USER_TOKEN {
-            params["session_token"] = userToken
-        }
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            Alamofire.request(.GET, APIUrl, parameters: params).responseJSON { (_, _, jsonData, errors) in
-                if let data: AnyObject = jsonData {
-                    for (key: String, product: JSON) in JSON(data) {
-                        products.append(
-                            Product(jsonProduct: product)
+        static func fetch(#searchValue: String, page: Int = 1, sid: Int, sessionToken: String, responseHandler: ([Product], APIError?, NSError?) -> Void) {
+            var products: [Product] = []
+            var apiError: APIError?
+            var error: NSError?
+            
+            var parameters: [String: AnyObject] = [
+                "q": [
+                    "name_cont": searchValue
+                ],
+                "page": page,
+                "sid": sid
+            ]
+            
+            var headers = [
+                "Authorization": "Token token=\(sessionToken)"
+            ]
+            
+            switch CLLocationManager.authorizationStatus() {
+            case .AuthorizedAlways, .AuthorizedWhenInUse:
+                parameters["without_position"] = 0
+            default:
+                parameters["without_position"] = 1
+            }
+            
+            Alamofire.request(.GET, URI, parameters: parameters, headers: headers).responseJSON { (request, response, data, errors) in
+                error = errors
+                
+                if let data: AnyObject = data {
+                    if response?.statusCode == 200 {
+                        for (key: String, product: JSON) in JSON(data) {
+                            products.append(
+                                Product(
+                                    jsonProduct: product
+                                )
+                            )
+                        }
+                    } else {
+                        apiError = APIError(
+                            JSON(data)
                         )
                     }
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    responseHandler(products, errors)
+                    responseHandler(products, apiError, error)
                 }
             }
         }
     }
     
-    static func setNewLocation(location: CLLocation, responseHandler: (Bool, NSHTTPURLResponse?, NSError?) -> Void) {
-        var success = false
+    
+    class Users {
+        static let path = "users"
+        static var URI: String {
+            return "\(API.URI)\(path)/"
+        }
         
-        if USER_TOKEN != nil {
-            var APIUrl = API.BASE_URL + "users/positions"
-        
-            var params: JSON = [
-                "position": [
-                    "latitude": location.coordinate.latitude,
-                    "longitude": location.coordinate.longitude
+        class Sessions {
+            static let path = "sessions"
+            static let singleResourcePath = "session"
+            static var URI: String {
+                return "\(API.Users.URI)\(path)/"
+            }
+            
+            static var singleResourceURI: String {
+                return "\(API.Users.URI)\(singleResourcePath)/"
+            }
+            
+            static func create(device: String, responseHandler: (JSON?, APIError?, NSError?) -> Void) {
+                var session: JSON?
+                var apiError: APIError?
+                var error: NSError?
+                
+                var parameters: [String: AnyObject] = [
+                    "session[device]": device
                 ]
-            ]
-            
-            let mutableURLRequest = mutableURLRequestWithTokenAuthorization(url: APIUrl, httpMethod: "POST")
-            mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            mutableURLRequest.HTTPBody = params.rawData()
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-                Alamofire.request(mutableURLRequest).response { (request, response, data, errors) in
-                    if let response = response {
-                        switch response.statusCode {
-                        case 201: success = true
-                        default: success = false
+                
+                Alamofire.request(.POST, URI, parameters: parameters).responseJSON { (request, response, data, errors) in
+                    error = errors
+                    
+                    if let data: AnyObject = data {
+                        if response?.statusCode == 201 {
+                            session = JSON(data)
+                        } else {
+                            apiError = APIError(
+                                JSON(data)
+                            )
                         }
                     }
                     
                     dispatch_async(dispatch_get_main_queue()) {
-                        responseHandler(success, response, errors)
+                        responseHandler(session, apiError, error)
                     }
                 }
             }
-        }
-    }
-    
-    static func getNewUserToken(responseHandler: (String?, NSHTTPURLResponse?, NSError?) -> Void) {
-        var APIUrl = API.BASE_URL + "users/sessions"
-        var token: String?
-        
-        let parameters: [String: AnyObject] = [
-            "device": UIDevice.currentDevice().model
-        ]
-        
-       
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            Alamofire.request(.POST, APIUrl, parameters: parameters).responseJSON { (_, response, jsonData, errors) in
-                if let data: AnyObject = jsonData {
-                    let userObj = JSON(data)
-                    token = userObj["token"].string!
-                    
-                    self.keychain["token"] = token
-                }
             
-                dispatch_async(dispatch_get_main_queue()) {
-                    responseHandler(token, response, errors)
-                }
-            }
-        }
-    }
-    
-    static func checkUserTokenValidity(responseHandler: (Bool, NSHTTPURLResponse?, NSError?) -> Void) {
-        let APIUrl = BASE_URL + "users/session"
-        let mutableURLRequest = mutableURLRequestWithTokenAuthorization(url: APIUrl)
-        var validity = false
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            Alamofire.request(mutableURLRequest).response { (request, response, data, errors) in
-                if let response = response {
-                    switch response.statusCode {
-                    case 200: validity = true
-                    default: validity = false
+            static func validate(sid: Int, sessionToken: String, responseHandler: (Bool, APIError?, NSError?) -> Void) {
+                var valid = false
+                var apiError: APIError?
+                var error: NSError?
+                
+                var parameters: [String: AnyObject] = [
+                    "sid": sid
+                ]
+                
+                var headers = [
+                    "Authorization": "Token token=\(sessionToken)"
+                ]
+                
+                Alamofire.request(.GET, singleResourceURI, parameters: parameters, encoding: .URL, headers: headers).responseJSON { (request, response, data, errors) in
+                    error = errors
+                    
+                    if response?.statusCode == 200 {
+                        valid = true
+                    } else {
+                        if let data: AnyObject = data {
+                            apiError = APIError(
+                                JSON(data)
+                            )
+                        }
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        responseHandler(valid, apiError, error)
                     }
                 }
+            }
+        }
+        
+        class Positions {
+            static let path = "positions"
+            static var URI: String {
+                return "\(API.Users.URI)\(path)/"
+            }
+            
+            static func create(location: CLLocation, sid: Int, sessionToken: String, responseHandler: (Bool, APIError?, NSError?) -> Void) {
+                var success = false
+                var apiError: APIError?
+                var error: NSError?
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    responseHandler(validity, response, errors)
+                var parameters: [String: AnyObject] = [
+                    "sid": sid,
+                    "position[latitude]": "\(location.coordinate.latitude)",
+                    "position[longitude]": "\(location.coordinate.longitude)"
+                ]
+                
+                var headers = [
+                    "Authorization": "Token token=\(sessionToken)"
+                ]
+                
+                Alamofire.request(.POST, URI, parameters: parameters, encoding: .URL, headers: headers).responseJSON { (request, response, data, errors) in
+                    error = errors
+                    
+                    if response?.statusCode == 201 {
+                        success = true
+                    } else {
+                        if let data: AnyObject = data {
+                            apiError = APIError(
+                                JSON(data)
+                            )
+                        }
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        responseHandler(success, apiError, error)
+                    }
                 }
             }
         }
     }
-    
-    static func mutableURLRequestWithTokenAuthorization(#url: String, httpMethod: String = "GET") -> NSMutableURLRequest {
-        let url = NSURL(string: url)!
-        let mutableURLRequest = NSMutableURLRequest(URL: url)
-        
-        mutableURLRequest.HTTPMethod = httpMethod
-        
-        if let userToken = USER_TOKEN {
-            mutableURLRequest.setValue("Token token=\(userToken)", forHTTPHeaderField: "Authorization")
-        }
-        
-        return mutableURLRequest
-    }
-    
-    
-    
-    
-    
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

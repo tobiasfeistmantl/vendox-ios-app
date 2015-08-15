@@ -88,14 +88,14 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         locationManager.stopUpdatingLocation()
         
-        API.checkUserTokenValidity { (validity, _, _) in
+        API.Users.Sessions.validate(UserAccount.Session.id!, sessionToken: UserAccount.Session.token!) { (validity, _, _) in
             if validity == true {
-                API.setNewLocation(self.locationManager.location) { (_, _, _) in
+                API.Users.Positions.create(self.locationManager.location, sid: UserAccount.Session.id!, sessionToken: UserAccount.Session.token!) { (_, _, _) in
                     self.refreshProducts()
                 }
             } else {
-                API.getNewUserToken() { token, _, _ in
-                    API.setNewLocation(self.locationManager.location) { (_, _, _) in
+                UserAccount.Session.create { _, _ in
+                    API.Users.Positions.create(self.locationManager.location, sid: UserAccount.Session.id!, sessionToken: UserAccount.Session.token!) { (_, _, _) in
                         self.refreshProducts()
                     }
                 }
@@ -129,7 +129,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
     }
     
     func getProducts() {
-        API.getProducts(searchValue: searchBar.text, page: nextPage) { (products, errors) in
+        API.Products.fetch(searchValue: searchBar.text, page: nextPage, sid: UserAccount.Session.id!, sessionToken: UserAccount.Session.token!) { (products, apiError, error) in
             self.products += products
             self.tableView.reloadData()
             
@@ -149,7 +149,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         nextPage = 1
         
-        API.getProducts(searchValue: searchBar.text, page: nextPage) { (products, errors) in
+        API.Products.fetch(searchValue: searchBar.text, page: nextPage, sid: UserAccount.Session.id!, sessionToken: UserAccount.Session.token!) { (products, apiError, error) in
             self.products = products
             self.tableView.reloadData()
             
@@ -186,7 +186,7 @@ class ProductsTableViewController: UITableViewController, CLLocationManagerDeleg
         let navigationRectangle = CGRectMake(0, 0, 100, 22.63)
         
         let navigationImage = UIImageView(frame: navigationRectangle)
-        navigationImage.image = UIImage(named: "Brand Name White Navigation Bar")!
+        navigationImage.image = UIImage(named: "Brand Name White")!
         
         let workaroundImageView = UIImageView(frame: navigationRectangle)
         workaroundImageView.addSubview(navigationImage)

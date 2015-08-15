@@ -13,7 +13,6 @@ class ProductsNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "Default BG Navigation Bar")!.resizableImageWithCapInsets(UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .Stretch), forBarMetrics: .Default)
         navigationBar.barStyle = UIBarStyle.Black
     }
 

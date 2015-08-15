@@ -15,6 +15,7 @@ import SwiftyJSON
 struct Product {
     var id: Int
     var name: String
+    var priceInCent: Int?
     var price: Double?
     var description: String?
     var company: Company
@@ -34,10 +35,15 @@ struct Product {
     }
     
     /*** For API data ***/
-    init(id: JSON, name: JSON, price: JSON, description: JSON, company: JSON, image: JSON, latitude: JSON, longitude: JSON, distanceToUser: JSON) {
+    init(id: JSON, name: JSON, priceInCent: JSON, description: JSON, company: JSON, image: JSON, latitude: JSON, longitude: JSON, distanceToUser: JSON) {
         self.id = id.int!
         self.name = name.string!
-        self.price = price.double
+        self.priceInCent = priceInCent.int
+        
+        if let priceInCent = self.priceInCent {
+            self.price = Double(priceInCent) / 100
+        }
+        
         self.description = description.string
         
         self.company = Company(
@@ -70,7 +76,7 @@ struct Product {
         self.init(
             id: product["id"],
             name: product["name"],
-            price: product["price"],
+            priceInCent: product["price_in_cent"],
             description: product["description"],
             company: product["company"],
             image: product["picture"],

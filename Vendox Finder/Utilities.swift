@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 import CoreLocation
 import RealmSwift
+import Alamofire
 
 let locationManager = CLLocationManager()
 let realm = Realm()

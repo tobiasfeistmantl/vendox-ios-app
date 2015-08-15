@@ -10,9 +10,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Default BG" translatesAutoresizingMaskIntoConstraints="NO" id="DKG-Q3-M9q">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Brand Name White" translatesAutoresizingMaskIntoConstraints="NO" id="Rzu-Cq-qEq">
                     <rect key="frame" x="58" y="185" width="260" height="58"/>
                     <constraints>
@@ -21,13 +18,9 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.098039215690000001" green="0.30980392159999998" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="DKG-Q3-M9q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="7FH-eW-Cgj"/>
-                <constraint firstAttribute="bottom" secondItem="DKG-Q3-M9q" secondAttribute="bottom" id="Ax2-I1-kp5"/>
                 <constraint firstAttribute="centerX" secondItem="Rzu-Cq-qEq" secondAttribute="centerX" id="CoC-B9-h5n"/>
-                <constraint firstItem="DKG-Q3-M9q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IYQ-Ce-FPI"/>
-                <constraint firstAttribute="trailing" secondItem="DKG-Q3-M9q" secondAttribute="trailing" id="kGm-oA-bnl"/>
                 <constraint firstAttribute="centerY" secondItem="Rzu-Cq-qEq" secondAttribute="centerY" constant="120" id="rTF-lw-xrB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -37,6 +30,5 @@
     </objects>
     <resources>
         <image name="Brand Name White" width="433" height="98"/>
-        <image name="Default BG" width="316" height="426"/>
     </resources>
 </document>
